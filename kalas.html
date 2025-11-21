@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="sv">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Kalas! 🎉</title>
+	<style>
+		:root{
+			--bg1:#FFDAB9; /* light peach */
+			--bg2:#FFF5EE;
+			--accent:#FF6B6B;
+			--paper:#fff;
+			--shadow: rgba(0,0,0,0.12);
+		}
+		html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+		body{
+			background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 60%);
+			display:flex;align-items:center;justify-content:center;padding:2rem;
+			color:#333;
+		}
+		.stage{width:100%;max-width:1000px;background:linear-gradient(180deg,rgba(255,255,255,0.8),rgba(255,255,255,0.95));box-shadow:0 8px 24px var(--shadow);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+
+		header{display:flex;align-items:center;gap:16px}
+		h1{margin:0;font-size:2rem;display:flex;align-items:center;gap:.5rem}
+
+		/* Balloons */
+		.balloon{position:absolute;width:80px;height:110px;border-radius:50% 50% 45% 45%;transform-origin:center bottom}
+		.balloon::after{content:'';position:absolute;left:50%;bottom:-18px;width:2px;height:20px;background:rgba(0,0,0,0.25);transform:translateX(-50%)}
+		.balloon.yellow{background:linear-gradient(135deg,#FFD93D,#FFB84D);left:12%;top:6%;animation:float 6s ease-in-out infinite}
+		.balloon.pink{background:linear-gradient(135deg,#FF8FB1,#FF6B9A);left:82%;top:10%;width:70px;height:95px;animation:float 5s ease-in-out infinite}
+		.balloon.blue{background:linear-gradient(135deg,#6ED3FF,#4DA4FF);left:40%;top:2%;width:90px;height:120px;animation:float 7s ease-in-out infinite}
+		@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
+
+		/* Main scene */
+		.scene{display:flex;gap:28px;align-items:flex-end;justify-content:center;padding:22px 12px}
+		.table{width:65%;background:linear-gradient(180deg,#EFEFEF,#F9F9F9);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.06);display:flex;flex-direction:column;align-items:center}
+
+		/* Cake */
+		.cake{position:relative;width:260px}
+		.layer{width:100%;height:60px;background:#F2C6B3;border-radius:10px;border:6px solid #fff;box-shadow:0 6px 10px rgba(0,0,0,0.08)}
+		.layer.bottom{height:80px;background:#E8AFA0}
+		.frosting{position:absolute;left:12px;right:12px;top:6px;height:30px;background:#fff;border-radius:16px;box-shadow:inset 0 -6px 10px rgba(0,0,0,0.03)}
+		.candles{display:flex;gap:10px;position:relative;justify-content:center;margin-top:-6px}
+		.candle{width:10px;height:36px;background:#fff;border-radius:3px;position:relative;box-shadow:0 2px 6px rgba(0,0,0,0.12)}
+		.candle::before{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:100%;width:10px;height:14px;background:linear-gradient(#FFD166,#FF8C42);border-radius:50%;filter:blur(.2px)}
+		.flame{position:absolute;left:50%;transform:translateX(-50%);bottom:100%;width:8px;height:12px;border-radius:50% 50% 30% 30%;background:radial-gradient(circle at 30% 30%,#fff2 0%,transparent 40%),linear-gradient(#FFD46B,#FF6B6B);animation:flicker .25s linear infinite}
+		@keyframes flicker{0%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(.98)}}
+
+		/* Presents */
+		.gifts{display:flex;flex-direction:column;gap:12px;align-items:center;width:30%}
+		.gift{width:130px;height:90px;border-radius:10px;background:linear-gradient(180deg,#FFEDD5,#FFD6A5);box-shadow:0 6px 16px rgba(0,0,0,0.08);position:relative}
+		.gift.r2{background:linear-gradient(180deg,#D8F3FF,#AEE7FF);width:150px;height:100px}
+		.ribbon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88%;height:28px;background:rgba(255,255,255,0.9);border-radius:4px;box-shadow:inset 0 -2px 6px rgba(0,0,0,0.05)}
+		.bow{position:absolute;left:50%;top:18%;transform:translateX(-50%);width:64px;height:24px}
+		.bow:before,.bow:after{content:'';position:absolute;width:28px;height:22px;background:rgba(255,255,255,0.95);border-radius:16px}
+		.bow:before{left:0;transform:rotate(-20deg)}
+		.bow:after{right:0;transform:rotate(20deg)}
+
+		/* Confetti */
+		.confetti-piece{position:absolute;width:10px;height:14px;opacity:0;pointer-events:none}
+
+		footer{display:flex;justify-content:center;margin-top:12px}
+
+		/* Responsive */
+		@media (max-width:720px){.scene{flex-direction:column}.gifts{width:100%;flex-direction:row;justify-content:center}.table{width:100%}}
+	</style>
+</head>
+<body>
+	<div class="stage">
+		<div class="balloon yellow" aria-hidden></div>
+		<div class="balloon pink" aria-hidden></div>
+		<div class="balloon blue" aria-hidden></div>
+
+		<header>
+			<h1>Grattis! Det är kalas 🎉</h1>
+		</header>
+
+		<main class="scene" role="main" aria-label="Kalas med tårta och presenter">
+			<section class="table" aria-hidden="false">
+				<div class="cake" aria-label="Tårta med ljus">
+					<div class="layer bottom"></div>
+					<div class="layer" style="margin-top:-22px"></div>
+					<div class="frosting"></div>
+					<div class="candles" style="margin-top:12px">
+						<div class="candle"><span class="flame"></span></div>
+						<div class="candle"><span class="flame"></span></div>
+						<div class="candle"><span class="flame"></span></div>
+					</div>
+				</div>
+				<p style="margin-top:18px;font-size:1.05rem;text-align:center;max-width:420px">Kom och fira! Tårta, sång och paket väntar. Klicka på knappen nedan för att låta confettin falla 🎊</p>
+				<div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+					<button id="confettiBtn" style="background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.12)">Släpp konfetti</button>
+					<button id="blowCandles" style="background:#6EC48A;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.12)">Blåsa ut ljusen</button>
+				</div>
+			</section>
+
+			<aside class="gifts" aria-label="Presenter">
+				<div class="gift" title="Present 1">
+					<div class="ribbon"></div>
+					<div class="bow"></div>
+				</div>
+				<div class="gift r2" title="Present 2">
+					<div class="ribbon"></div>
+					<div class="bow"></div>
+				</div>
+			</aside>
+		</main>
+
+		<footer>
+			<small>En liten demo för ett glatt kalas</small>
+		</footer>
+	</div>
+
+	<script>
+		// Enkel konfetti-generator
+		const confettiBtn = document.getElementById('confettiBtn');
+		const stage = document.querySelector('.stage');
+
+		function rand(min,max){return Math.random()*(max-min)+min}
+
+		function makeConfetti(){
+			const colors = ['#FF6B6B','#FFD93D','#6ED3FF','#B9F18C','#FF8FB1','#A78BFA']
+			const piece = document.createElement('div');
+			piece.className = 'confetti-piece';
+			piece.style.left = rand(10,90) + '%';
+			piece.style.top = rand(0,10) + '%';
+			piece.style.background = colors[Math.floor(rand(0,colors.length))];
+			piece.style.transform = `rotate(${rand(0,360)}deg)`;
+			piece.style.opacity = 1;
+			piece.style.width = rand(6,12) + 'px';
+			piece.style.height = rand(8,16) + 'px';
+			stage.appendChild(piece);
+
+			const duration = rand(1800,3400);
+			piece.animate([
+				{transform: `translateY(0) rotate(${rand(0,360)}deg)`, opacity:1},
+				{transform: `translateY(${rand(220,480)}px) rotate(${rand(360,1080)}deg)`, opacity:0}
+			],{duration:duration,easing:'cubic-bezier(.2,.7,.2,1)'});
+
+			setTimeout(()=>piece.remove(), duration+50);
+		}
+
+		confettiBtn.addEventListener('click', ()=>{
+			// skicka många små bitar
+			for(let i=0;i<40;i++) setTimeout(makeConfetti,i*30+Math.random()*200);
+		});
+
+		// blåsa ut ljusen
+		const blowBtn = document.getElementById('blowCandles');
+		let candlesOut = false;
+		blowBtn.addEventListener('click', ()=>{
+			const flames = document.querySelectorAll('.flame');
+			if(!candlesOut){
+				flames.forEach((f,i)=>{
+					f.style.transition='transform .5s, opacity .6s';
+					f.style.transform='translateX(-50%) scaleY(.1)';
+					f.style.opacity='0';
+				});
+				blowBtn.textContent='Tänd ljusen';
+				candlesOut = true;
+			} else {
+				flames.forEach((f,i)=>{
+					f.style.transition='';
+					f.style.transform='translateX(-50%)';
+					f.style.opacity='1';
+				});
+				blowBtn.textContent='Blåsa ut ljusen';
+				candlesOut = false;
+			}
+		});
+	</script>
+</body>
+</html>
+
