@@ -1,2 +1,2 @@
-# shcool
+# school
 something big
