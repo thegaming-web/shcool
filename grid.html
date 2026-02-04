@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .wrapper{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.5fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3rem;
+            background-color: lightsalmon;
+        }
+        .box1{
+            grid-column-start: 2;
+            grid-column-end: 4;
+            grid-row-start: 2;
+            background-color: aquamarine;
+        }
+        .box2{
+            background-color: cadetblue;
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        .box3{
+            background-color: chocolate;
+        }
+        .box1, .box2, .box3{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: rgb(255, 123, 123);
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box1">Box 1</div>
+        <div class="box2">Box 2</div>
+        <div class="box3">Box 3</div>
+    </div>
+</body>
+</html>
