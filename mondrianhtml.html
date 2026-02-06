@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mondrian Layout</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #eee;
+      margin: 0;
+    }
+
+    .canvas {
+      width: 748px;
+      height: 748px;
+      background: #f3f2ed;
+      display: grid;
+      grid-template-columns: 320px 1fr 50px;
+      grid-template-rows: 414px 1fr 20px;
+      gap: 9px;
+      padding: 9px;
+      box-sizing: border-box;
+    }
+
+    .box {
+      border: 10px solid black;
+      box-sizing: border-box;
+      background: #f3f2ed;
+    }
+
+    .red {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      background: #e53935;
+    }
+
+    .white-top {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .white-left {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .white-center {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .blue {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+      height: 130px;
+      align-self: start;
+      background: #0d47a1;
+    }
+
+    .yellow {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      background: #fbc02d;
+    }
+
+    .black {
+      grid-column: 3 / 4;
+      grid-row: 3 / 4;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="box red"></div>
+    <div class="box white-top"></div>
+    <div class="box white-left"></div>
+    <div class="box white-center"></div>
+    <div class="box blue"></div>
+    <div class="box yellow"></div>
+    <div class="box black"></div>
+  </div>
+</body>
+</html>
